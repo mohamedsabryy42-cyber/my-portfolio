@@ -3,10 +3,22 @@ import { useState } from "react";
 
 
 export default function SignIn () {
-  const validation = /[d]{3,6}$/;
   const [username, setUsername] = useState("");
-  function welcomingUser (e) {
-    setUsername (e.target.value.trim())
+  const [usernameValidation, setUsernameValidation] = useState("");
+  const validation = /^[a-z0-9_- ]{3,}$/i;
+
+  function usernameFunction (e) {
+    setUsername (e.target.value)
+    if (validation.test(username))
+  {
+    setUsernameValidation(<p  className="text-green-400">Valid Username</p>)
+  }
+  if (!validation.test(username)) {
+    setUsernameValidation(<p  className="text-red-400">Invalid Username, it must contain, atleast 3 char, not including all symbols but these $-_</p>)
+  }
+  if (e.target.value === "") {
+    setUsernameValidation("")
+  }
   }
   return (
     <div className="bg-black flex justify-center items-center min-h-screen">
@@ -23,11 +35,13 @@ export default function SignIn () {
 
         <label className="block text-semibold text-3xl">Username</label>
         <input
-        onChange={welcomingUser}
+        onChange={usernameFunction}
+        value={username}
           type="text"
           placeholder="Username"
           className="w-full border rounded p-2 focus:ring-2 ring-blue-400 outline-none mb-2"
         />
+        {usernameValidation}
 
         <label className="block text-semibold text-3xl">Password</label>
         <input
@@ -35,7 +49,7 @@ export default function SignIn () {
           placeholder="Password"
           className="w-full border rounded p-2 focus:ring-2 ring-blue-400 outline-none mb-2"
         />
-
+        
         <label className="block text-3xl">Confirm Password</label>
         <input
           type="password"
@@ -51,7 +65,7 @@ export default function SignIn () {
         </select>
 
         <button
-          type="submit"
+        
           className=" cursor-pointer border rounded w-full mt-4 bg-blue-500 hover:bg-blue-400 p-2 text-white"
         >
           Sign In
