@@ -5,13 +5,15 @@ export default function Form () {
     {
       username: "",
       password: "",
+      confPassword: "",
       errors: {
         username: "",
         password: "",
+        confPassword: "",
       }
     }
   )
-  
+
 
 
   const handleChange = (e) => {
@@ -22,7 +24,7 @@ export default function Form () {
       error = "min 3 char"
     }
     else if (!/^[a-zA-Z0-9_ -]+$/.test(value)) {
-      error = "No symbols allowed but these _ and space and -"
+      error = "Only _ - symbols are allowed."
     }
     }
     if (value === "") {
@@ -33,9 +35,9 @@ export default function Form () {
       error = "Too Short"
     }
     else if (!/^(?=.*[A-Za-z])(?=.*\d).{6,}$/.test(value)) {
-  error = "Password must be at least 6 characters with at least one letter and one number"
+  error = "least 6 char, 1 letter & 1 number"
 }
-    }
+    } 
     setForm (prev => ({
   ...prev,
   [name]: value,
@@ -103,13 +105,19 @@ return (
           <input
           name="password"
           type="password"
-          onChange={handleChange}
           value={form.password}
+          onChange={handleChange}
             placeholder="Password"
             className="w-full border rounded p-2 focus:ring-2 ring-yellow-300 outline-none mt-4"
             />
             {form.errors.password}
-          <input type="password" placeholder="Confirm Password" className="w-full border rounded p-2 focus:ring-2 ring-yellow-300 outline-none mt-4"/>
+          <input
+          name="confPassword"
+          value={form.confPassword}
+          onChange={handleChange}
+           type="password"
+            placeholder="Confirm Password" 
+            className="w-full border rounded p-2 focus:ring-2 ring-yellow-300 outline-none mt-4"/>
 
         <button
         
