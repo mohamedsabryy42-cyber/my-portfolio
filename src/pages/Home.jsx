@@ -1,8 +1,9 @@
-import SignIn from "./SignIn";
+
+import me from "../imgs/whatsapp.jpg"
 
 export default function Home() {
   return (
     <div  className="mt-20">
-    بسم الله توكلت على الله
+      <img src={me} className="profile-img" alt="my photo"/>
   </div>
 )}
